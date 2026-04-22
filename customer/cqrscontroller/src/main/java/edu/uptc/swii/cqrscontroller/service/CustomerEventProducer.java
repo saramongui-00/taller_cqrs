@@ -26,7 +26,7 @@ public class CustomerEventProducer {
         String message = new String();
         JsonUtils jsonUtils = new JsonUtils();
         message = jsonUtils.toJson(customer);
-        System.out.println("CustomerEventProducer sendMessage: "+message);
+        System.out.println("CustomerEventProducer sendMessage: " + message);
         kafkaTemplate.send(topic, message);
     }
 }

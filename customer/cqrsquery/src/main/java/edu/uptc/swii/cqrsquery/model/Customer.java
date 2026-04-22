@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.annotation.Id;
 
-@Document(collection="customer")
+@Document(collection = "customer")
 public class Customer {
     @Id
     @JsonProperty("document")
@@ -87,7 +87,5 @@ public class Customer {
         return "Customer [document=" + document + ", firstname=" + firstname + ", lastname=" + lastname + ", address="
                 + address + ", phone=" + phone + ", email=" + email + "]";
     }
-
-
 
 }
