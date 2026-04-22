@@ -13,7 +13,7 @@ public class CustomerService {
     private final String UPDATE_CUSTOMER_TOPIC = "update-customer-topic";
     private final String DELETE_CUSTOMER_TOPIC = "delete-customer-topic";
 
-    public CustomerService(edu.uptc.swii.cqrscontroller.repository.CustomerRepository customerRepository,
+    public CustomerService(CustomerRepository customerRepository,
                            CustomerEventProducer customerEventProducer) {
         CustomerRepository = customerRepository;
         this.customerEventProducer = customerEventProducer;
