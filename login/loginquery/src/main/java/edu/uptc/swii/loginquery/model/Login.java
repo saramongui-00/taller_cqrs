@@ -1,24 +1,25 @@
-package edu.uptc.swii.logincontroller.model;
+package edu.uptc.swii.loginquery.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name="`login`")
+@Document(collection="login")
 public class Login {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @JsonProperty("id")
     private long id;
-    @Column(name = "document")
+    @JsonProperty("document")
     private String document;
-    @Column(name = "password")
+    @JsonProperty("password")
     private String password;
 
     public Login(){
 
     }
 
-    public Login(String document, String password) {
+    public Login(long id, String document, String password) {
+        this.id = id;
         this.document = document;
         this.password = password;
     }

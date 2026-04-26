@@ -1,5 +1,6 @@
 package edu.uptc.swii.cqrscontroller.service;
 
+import edu.uptc.swii.cqrscontroller.dto.CustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CustomerEventProducer {
         return customer;
     }
 
-    public void sendMessage(String topic, Customer customer) {
+    public void sendMessage(String topic, CustomerRequest customer) {
         String message = new String();
         JsonUtils jsonUtils = new JsonUtils();
         message = jsonUtils.toJson(customer);
