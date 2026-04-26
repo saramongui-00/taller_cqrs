@@ -14,20 +14,12 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/addLogin")
-    public String sendMessageAddLogin(@RequestBody Login Login) {
-        loginService.addLogin(Login);
-        return Login.toString();
-    }
-
-    @PostMapping("/updateLogin")
-    public String sendMessageUpdateLogin(@RequestBody Login Login) {
-        loginService.updateLogin(Login);
-        return Login.toString();
-    }
-
-    @PostMapping("/delLogin")
-    public String sendMessageDeleteLogin(@RequestBody Login Login) {
-        return loginService.deleteLogin(Login);
+    @PostMapping("/login")
+    public String login(@RequestBody Login login){
+        String msg = "Credenciales incorrectas";
+        if(loginService.auth(login.getDocument(), login.getPassword())){
+            msg = "Inicio de sesión correcto";
+        }
+        return msg;
     }
 }

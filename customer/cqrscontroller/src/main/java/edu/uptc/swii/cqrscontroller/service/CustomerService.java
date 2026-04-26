@@ -1,5 +1,6 @@
 package edu.uptc.swii.cqrscontroller.service;
 
+import edu.uptc.swii.cqrscontroller.dto.CustomerRequest;
 import org.springframework.stereotype.Service;
 
 import edu.uptc.swii.cqrscontroller.model.Customer;
@@ -19,22 +20,23 @@ public class CustomerService {
         this.customerEventProducer = customerEventProducer;
     }
 
-    public Customer addCustomer(Customer customer){
-        Customer savedCustomer = CustomerRepository.save(customer);
+    public Customer addCustomer(CustomerRequest customer){
+        Customer savedCustomer = CustomerRepository.save(mapCustomerRequest(customer));
         customerEventProducer.sendMessage(ADD_CUSTOMER_TOPIC,customer);
         return savedCustomer;
     }
 
-    public Customer updateCustomer(Customer customer){
-        Customer savedCustomer = CustomerRepository.save(customer);
+    public Customer updateCustomer(CustomerRequest customer){
+        Customer savedCustomer = CustomerRepository.save(mapCustomerRequest(customer));
         customerEventProducer.sendMessage(UPDATE_CUSTOMER_TOPIC,customer);
         return savedCustomer;
     }
 
-    public String deleteCustomer(Customer customer){
+    public String deleteCustomer(CustomerRequest customer){
         String message=new String();
         try{
-            CustomerRepository.delete(customer);
+            Customer savedCustomer = mapCustomerRequest(customer);
+            CustomerRepository.delete(savedCustomer);
             customerEventProducer.sendMessage(DELETE_CUSTOMER_TOPIC,customer);
             message = "Customer deleted: "+customer.toString();
         }catch(Exception e){
@@ -42,5 +44,10 @@ public class CustomerService {
             System.err.println(e.getMessage());
         }
         return message;
+    }
+
+    public Customer mapCustomerRequest(CustomerRequest customer){
+        return new Customer(customer.getDocument(), customer.getFirstname(),
+                customer.getLastname(), customer.getAddress(), customer.getPhone(), customer.getEmail());
     }
 }

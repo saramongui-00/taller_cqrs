@@ -1,5 +1,6 @@
 package edu.uptc.swii.cqrscontroller.controller;
 
+import edu.uptc.swii.cqrscontroller.dto.CustomerRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,19 +17,19 @@ public class CustomerController {
     }
 
     @PostMapping("/addcustomer")
-    public String sendMessageAddCustomer(@RequestBody Customer customer) {
+    public String sendMessageAddCustomer(@RequestBody CustomerRequest customer) {
         customerService.addCustomer(customer);
         return customer.toString();
     }
 
     @PostMapping("/updatecustomer")
-    public String sendMessageUpdateCustomer(@RequestBody Customer customer) {
+    public String sendMessageUpdateCustomer(@RequestBody CustomerRequest customer) {
         customerService.updateCustomer(customer);
         return customer.toString();
     }
 
     @PostMapping("/delcustomer")
-    public String sendMessageDeleteCustomer(@RequestBody Customer customer) {
+    public String sendMessageDeleteCustomer(@RequestBody CustomerRequest customer) {
         return customerService.deleteCustomer(customer);
     }
 

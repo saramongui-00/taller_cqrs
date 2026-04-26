@@ -1,14 +1,12 @@
 package edu.uptc.swii.logincontroller.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="`login`")
 public class Login {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "document")
@@ -20,8 +18,7 @@ public class Login {
 
     }
 
-    public Login(long id, String document, String password) {
-        this.id = id;
+    public Login(String document, String password) {
         this.document = document;
         this.password = password;
     }
