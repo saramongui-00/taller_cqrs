@@ -15,7 +15,6 @@ public class LoginEventConsumer {
 
     @KafkaListener(topics = "add-login-topic")
     public void addLoginConsume(String message) {
-        System.out.println("SI SE CREOOOOOO");
         Login savedLogin = jsonUtils.fromJson(message, Login.class);
         loginService.addLogin(savedLogin);
     }

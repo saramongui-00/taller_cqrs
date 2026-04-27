@@ -20,14 +20,17 @@ public class LoginService {
     }
 
     public void addLogin(Login login){
+        loginRepository.save(login);
         loginEventProducer.sendMessage(ADD_LOGIN_TOPIC, login);
     }
 
     public void updateLogin(Login login){
+        loginRepository.save(login);
         loginEventProducer.sendMessage(UPDATE_LOGIN_TOPIC, login);
     }
 
     public void deleteLogin(Login login){
+        loginRepository.delete(login);
         loginEventProducer.sendMessage(DELETE_LOGIN_TOPIC, login);
     }
 
