@@ -22,4 +22,22 @@ public class LoginController {
         }
         return msg;
     }
+
+    @PostMapping("/addlogin")
+    public String sendMessageAddCustomer(@RequestBody Login login) {
+        loginService.addLogin(login);
+        return login.toString();
+    }
+
+    @PostMapping("/updatelogin")
+    public String sendMessageUpdateCustomer(@RequestBody Login login) {
+        loginService.updateLogin(login);
+        return login.toString();
+    }
+
+    @PostMapping("/dellogin")
+    public String sendMessageDeleteCustomer(@RequestBody Login login) {
+        loginService.deleteLogin(login);
+        return login.toString();
+    }
 }

@@ -35,7 +35,6 @@ public class LoginEventConsumer {
         }
 
         Login login = new Login(customer.getDocument(), customer.getPassword());
-        loginRepository.save(login);
         loginService.addLogin(login);
 
         System.out.println("Login creado automáticamente para el cliente " + customer.getDocument());
@@ -53,7 +52,6 @@ public class LoginEventConsumer {
 
         Login login = existing.get();
         login.setPassword(customer.getPassword());
-        loginRepository.save(login);
         loginService.updateLogin(login);
         System.out.println("Login modificado automáticamente para el cliente " + customer.getDocument());
     }
@@ -68,7 +66,6 @@ public class LoginEventConsumer {
             return;
         }
 
-        loginRepository.delete(existing.get());
         loginService.deleteLogin(existing.get());
         System.out.println("Login eliminado para el cliente " + customer.getDocument());
     }
